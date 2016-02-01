@@ -33,6 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // -->> To Route and Display Pages according response of index
 app.use('/', routes);
 
+console.log("http://localhost:3000/");
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
