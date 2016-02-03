@@ -9,7 +9,13 @@ router.get('/', function(req, res, next) {
 /* GET Sign UP page. */
 router.get('/Sign_UP', function(req, res, next) {
   res.render('Sign_UP', { title: 'Sign UP' });
+
 });
+
+router.post('/Sign_UP', function(req, res, next) {
+  res.render('Sign_UP', { title: 'Sign UP' });
+});
+
 
 /* GET Upload Panoramic View page. */
 router.get('/Upload_Panoramic_View', function(req, res, next) {
