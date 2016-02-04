@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+    <link rel='stylesheet' href='/stylesheets/UploadButtonStyle.css' />
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <script src="/javascripts/jquery-1.9.1.js"></script>
     <script src="/javascripts/jquery.validate.min.js"></script>
     <script src="/javascripts/additional-methods.min.js"></script>
     <script src="/javascripts/ValidateRegForm.js"></script>
-    <script>
-    </script>
-        </head>
+
+ </head>
 <body>
 <h1><%= title %></h1>
 <p>Welcome to <%= title %></p>
@@ -22,9 +23,19 @@
 <a href="/View_Panoramic_Scene">View_Panoramic_Scene  </a>
 <br/>
 <br/>
-<br/>
-<br/>
+<br>
 <form method="POST" action="Hello" onsubmit="Check()" id="formreg">
+
+    <img src="/images/default_profile.png" height="200" id="imgUpload" >
+    <br>
+    <br>
+    <label class="btn-upload">
+    <input type="file" name="Upload" onchange="previewFile()"><br>
+        <button class="btn" >Upload Photo</button>
+    </label>
+    <br>
+    <br>
+    <br>
     <input type="text" name="Fname" value="" placeholder="Full Name" id="FN" />
     <br/>
     <br/>
