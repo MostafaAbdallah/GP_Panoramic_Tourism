@@ -12,7 +12,7 @@ var validator = require('express-validator');
 
 //-->> To Go to Web Pages Page require the index.js
 var routes = require('./routes/index');
-
+var db= require('./db');
 
 
 var app = express();

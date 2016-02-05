@@ -14,6 +14,7 @@ router.get('/Sign_UP', function(req, res, next) {
 
 router.post('/Sign_UP', function(req, res, next) {
   res.render('Sign_UP', { title: 'Sign UP' });
+
 });
 
 
