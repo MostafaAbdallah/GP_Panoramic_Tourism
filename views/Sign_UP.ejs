@@ -24,13 +24,13 @@
 <br/>
 <br/>
 <br>
-<form method="POST" action="Hello" onsubmit="Check()" id="formreg">
+<form method="POST" action="/SignupDatabase.js" onsubmit="Check()" id="formreg">
 
-    <img src="/images/default_profile.png"  id="imgUpload"  height=200 width=200>
+    <img src="/images/default_profile.png"  id="imgUpload"  height=200 width=200 name="userImg">
     <br>
     <br>
     <label class="btn-upload">
-    <input type="file" name="Upload" onchange="previewFile()"><br>
+    <input type="file" name="Upload" onchange="previewFile()" ><br>
         <button class="btn" >Upload Photo</button>
     </label>
     <br>

@@ -82,8 +82,10 @@ function previewFile(){
     if (file) {
         reader.readAsDataURL(file); //reads the data as a URL
     } else {
-        preview.src = "";
+        preview.src = "/images/default_profile.png";
     }
+
+    console.log(file.toString());
 }
 
 previewFile();  //calls the function named previewFile()
