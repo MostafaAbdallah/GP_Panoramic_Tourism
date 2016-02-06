@@ -6,3 +6,9 @@ body {
 a {
   color: #00B7FF;
 }
+#bodyCanvas{
+  border:1px solid #c3c3c3;
+  margin-left:20%;
+  margin-right:20%;
+  background:transparent;
+}
