@@ -1,9 +1,18 @@
-/**
- * Created by Suhila ahmed on 1/31/2016.
- */
-var mongoose = require('mongoose');
+var mysql      = require('mysql');
+var connection = mysql.createConnection({
+    host     : 'localhost',
+    user     : 'root',
+    password : '123456',
+    database : 'panorama'
+});
+
+connection.connect(function(err) {
+    if(!err) {
+        console.log("Database is connected ... nn");
+    } else {
+        console.log("Error connecting database ... nn");
+    }
+});
 
 
-mongoose.connect('mongodb://suhila:123456@ds035385.mongolab.com:35385/user');
 
-module.exports=mongoose.connection;

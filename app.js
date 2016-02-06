@@ -1,5 +1,7 @@
 var express = require('express');
+var session = require('express-session');
 var path = require('path');
+var validator = require('express-validator');
 {
   /*var favicon = require('serve-favicon');
    var logger = require('morgan');
@@ -10,15 +12,24 @@ var path = require('path');
 
 //-->> To Go to Web Pages Page require the index.js
 var routes = require('./routes/index');
-
+var db= require('./db');
 
 
 var app = express();
 var db = require('./db');
+//app.use(express.cookieParser());
+app.use(session({
+  secret: 'Session',
+  //name: cookie_name,
+ // store: sessionStore, // connect-mongo session store
+  proxy: true,
+  resave: true,
+  saveUninitialized: true
+}));
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
+app.use(express.static(__dirname + '/public'));
 {
   // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
