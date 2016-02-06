@@ -3,7 +3,7 @@
  */
 var db = require('./db');
 var express = require('express');
-var session=require('client-sessions');
+//var session=require('client-sessions');
 var router = express.Router();
 
 var FullName ;
