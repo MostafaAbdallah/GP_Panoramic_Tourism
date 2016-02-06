@@ -15,8 +15,12 @@ router.get('/Sign_UP', function(req, res, next) {
 });
 
 router.post('/Hello', function(req, res, next) {
-  var signDB = require("/SignupDatabase");
-  signDB.test();
+  var signDB = require("./SignupDatabase");
+
+  //================================
+  signDB.test1();
+  signDB.test2();
+  //================================
   res.render('Hello', { title: 'Hello' });
 
 });

@@ -1,9 +1,12 @@
 /**
  * Created by Suhila ahmed on 2/5/2016.
  */
-var db = require('./db');
+//var db = require('./db');
 var express = require('express');
 //var session=require('client-sessions');
+
+/*var session=require('client-sessions');
+>>>>>>> 5e6f4039af0139d51182fd13001360a1b648b9f4
 var router = express.Router();
 
 var FullName ;
@@ -13,13 +16,21 @@ var Password ;
 var PhoneNumber ;
 var FacebookAcc ;
 var FlickerAcc ;
-var imagePath;
+var imagePath;*/
 
-module.exports = function Test(){
-
-    alert("Hello");
+//===========================
+var Test1 = function (){
+    console.log("Here");
 }
-router.post('/routes/SignupDatabase', function(req, res, next) {
+
+var Test2 = function (){
+    console.log("Mostafa");
+}
+module.exports.test1 = Test1;
+module.exports.test2 = Test2;
+
+//==================================
+/*router.post('/routes/SignupDatabase', function(req, res, next) {
 
     res.render('routes/SignupDatabase', { title: 'Sign UP data base' });
     var day= req.param('day');
@@ -38,7 +49,7 @@ router.post('/routes/SignupDatabase', function(req, res, next) {
 
     req.session.email='Emailsession';
     console.log(req.session.email);
-    res.redirect('home');
+    res.redirect('/');
     var post  = {
         FullName: FullName,
         Email: Email,
@@ -55,4 +66,4 @@ router.post('/routes/SignupDatabase', function(req, res, next) {
 
  });
 
-console.log(query.sql);
+console.log(query.sql);*/
