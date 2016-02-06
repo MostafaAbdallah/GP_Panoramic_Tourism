@@ -3,6 +3,7 @@
  */
 var db = require('./db');
 var express = require('express');
+var session=require('client-sessions');
 var router = express.Router();
 
 var FullName ;
@@ -13,6 +14,11 @@ var PhoneNumber ;
 var FacebookAcc ;
 var FlickerAcc ;
 var imagePath;
+
+module.exports = function Test(){
+
+    alert("Hello");
+}
 router.post('/routes/SignupDatabase', function(req, res, next) {
 
     res.render('routes/SignupDatabase', { title: 'Sign UP data base' });
@@ -30,6 +36,9 @@ router.post('/routes/SignupDatabase', function(req, res, next) {
       BirthDate = new Date(birth);
      imagePath = req.param('Upload').value;
 
+    req.session.email='Emailsession';
+    console.log(req.session.email);
+    res.redirect('home');
     var post  = {
         FullName: FullName,
         Email: Email,
@@ -44,6 +53,6 @@ router.post('/routes/SignupDatabase', function(req, res, next) {
         // Neat!
     });
 
-});
+ });
 
 console.log(query.sql);

@@ -1,5 +1,5 @@
 var express = require('express');
-
+var session = require('express-session');
 var path = require('path');
 var validator = require('express-validator');
 {
@@ -17,6 +17,15 @@ var db= require('./db');
 
 var app = express();
 var db = require('./db');
+//app.use(express.cookieParser());
+app.use(session({
+  secret: 'Session',
+  //name: cookie_name,
+ // store: sessionStore, // connect-mongo session store
+  proxy: true,
+  resave: true,
+  saveUninitialized: true
+}));
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
