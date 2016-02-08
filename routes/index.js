@@ -1,5 +1,7 @@
 var express = require('express');
 var session = require('express-session');
+var bodyParser = require('body-parser');
+
 var router = express.Router();
 
 /* GET home page. */
@@ -13,13 +15,15 @@ router.get('/Sign_UP', function(req, res, next) {
   res.render('Sign_UP', { title: 'Sign UP' });
 
 });
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
-router.post('/Hello', function(req, res, next) {
+router.post('/Hello',urlencodedParser, function(req, res, next) {
   var signDB = require("./SignupDatabase");
 
   //================================
-  signDB.test1();
-  signDB.test2();
+  signDB.SignUp(req,res);
+  console.log(req.body.email);
+ // signDB.test2();
   //================================
   res.render('Hello', { title: 'Hello' });
 
@@ -40,6 +44,10 @@ router.get('/Upload_Panoramic_View', function(req, res, next) {
 /* GET View Panoramic Scene page. */
 router.get('/View_Panoramic_Scene', function(req, res, next) {
   res.render('View_Panoramic_Scene', { title: 'View Panoramic Scene' });
+});
+
+router.get('/About', function(req, res, next) {
+  res.render('About', { title: 'About' });
 });
 
 

@@ -1,9 +1,9 @@
 /**
  * Created by Suhila ahmed on 1/31/2016.
  */
-/*var mongoose = require('mongoose');
+//var mongoose = require('mongoose');
 
-module.exports = mongoose.model('User', {
+/*module.exports = mongoose.model('User', {
     PhoneNumber: Number,
     FirstName: String,
     LastName: String,
@@ -12,6 +12,17 @@ module.exports = mongoose.model('User', {
     Email : String
 });*/
 
+var user = {
+    UserID : Number,
+    PhoneNumber: Number,
+    FullName: String,
+    BirthDate: Date,
+    Password: String,
+    Email : String,
+    ImagePath : String,
+    FacebookAcc : String ,
+    FilkcrAcc : String
+}
 /*
  var UserSchema=require('../schemas/user')
 var newUser= new UserSchema(info);
