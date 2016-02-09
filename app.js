@@ -11,6 +11,18 @@ var kinect = new Kinect2();
 var app = express();
 var server = require('http').createServer(app);
 
+server = require('http').createServer(app);
+server.once('error', function(err) {
+  if (err.code == 'EADDRINUSE') {
+    console.log(err.code + ': ' + app.get('port') + ' already in use');
+  }
+});
+server.listen(app.get('port'), function(){
+  console.log("Express server listening on port " + app.get('port'));
+});
+
+
+
 var io = require('socket.io').listen(server);
 var db = require('./db');
 
@@ -55,6 +67,7 @@ app.use(function(err, req, res, next) {
   });
 });
 */
+
 if(kinect.open()) {
   server.listen(3000);
   console.log('Server listening on port 3000');
