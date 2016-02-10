@@ -111,9 +111,10 @@ var SignUp = function (req,res){
 
         req.session.user=rows[0];
         console.log("Session : "+req.session.user.FullName);
+        res.redirect('/Hello');
     });
 
-    res.redirect('/');
+
 
 
 }
