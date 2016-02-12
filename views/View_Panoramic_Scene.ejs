@@ -18,253 +18,252 @@ and open the template in the editor.
 
 <script src="/socket.io/socket.io.js"></script>
 <script type="text/javascript">
-    var lastPosX;
-    var lastPosY;
-    var manualControl = false;
-    var longitude = 0;
-    var latitude = 0;
-    var savedX;
-    var savedY;
-    var savedLongitude;
-    var savedLatitude;
+    function View (PanoTexture) {
+        var lastPosX;
+        var lastPosY;
+        var manualControl = false;
+        var longitude = 0;
+        var latitude = 0;
+        var savedX;
+        var savedY;
+        var savedLongitude;
+        var savedLatitude;
 
-    // panoramas background
-    var panoramasArray = ["/images/01.jpg","/images/02.jpg","/images/03.jpg","/images/04.jpg","/images/05.jpg","/images/06.jpg","/images/07.jpg","/images/08.jpg"];
+        // panoramas background
+        //var panoramasArray = ["/images/01.jpg","/images/02.jpg","/images/03.jpg","/images/04.jpg","/images/05.jpg","/images/06.jpg","/images/07.jpg","/images/08.jpg"];
 
-    var panoramaNumber = Math.floor(Math.random()*panoramasArray.length);
+        var panoramaNumber = Math.floor(Math.random() * panoramasArray.length);
 
-    // setting up the renderer
-    renderer = new THREE.WebGLRenderer();
-    //renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setSize(window.innerWidth, 400);
-    document.body.appendChild(renderer.domElement);
+        // setting up the renderer
+        renderer = new THREE.WebGLRenderer();
+        //renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setSize(window.innerWidth, 400);
+        document.body.appendChild(renderer.domElement);
 
-    // creating a new scene
-    var scene = new THREE.Scene();
+        // creating a new scene
+        var scene = new THREE.Scene();
 
-    // adding a camera
-    var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
-    camera.target = new THREE.Vector3(0, 0, 0);
+        // adding a camera
+        var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
+        camera.target = new THREE.Vector3(0, 0, 0);
 
-    // creation of a big sphere geometry
-    var sphere = new THREE.SphereGeometry(100, 100, 40);
-    sphere.applyMatrix(new THREE.Matrix4().makeScale(-1, 1, 1));
+        // creation of a big sphere geometry
+        var sphere = new THREE.SphereGeometry(100, 100, 40);
+        sphere.applyMatrix(new THREE.Matrix4().makeScale(-1, 1, 1));
 
-    // creation of the sphere material
-    var sphereMaterial = new THREE.MeshBasicMaterial();
-    sphereMaterial.map = THREE.ImageUtils.loadTexture(panoramasArray[panoramaNumber])
+        // creation of the sphere material
+        var sphereMaterial = new THREE.MeshBasicMaterial();
+        sphereMaterial.map = THREE.ImageUtils.loadTexture(PanoTexture);
 
-    // geometry + material = mesh (actual object)
-    var sphereMesh = new THREE.Mesh(sphere, sphereMaterial);
-    scene.add(sphereMesh);
+        // geometry + material = mesh (actual object)
+        var sphereMesh = new THREE.Mesh(sphere, sphereMaterial);
+        scene.add(sphereMesh);
 
-    // listeners
-    document.addEventListener("mousedown", onDocumentMouseDown, false);
-    document.addEventListener("mousemove", onDocumentMouseMove, false);
-    document.addEventListener("mouseup", onDocumentMouseUp, false);
+        // listeners
+        document.addEventListener("mousedown", onDocumentMouseDown, false);
+        document.addEventListener("mousemove", onDocumentMouseMove, false);
+        document.addEventListener("mouseup", onDocumentMouseUp, false);
 
-    //Add Kinect Events
-    // document.addEventListener("mouseup", onDocumentMouseUp, false);
+        //Add Kinect Events
+        // document.addEventListener("mouseup", onDocumentMouseUp, false);
 
-    render();
+        render();
 
-    function render(){
+        function render() {
 
-        requestAnimationFrame(render);
+            requestAnimationFrame(render);
 
-        if(!manualControl){
-            longitude += 0.1;
-        }
-
-        // limiting latitude from -85 to 85 (cannot point to the sky or under your feet)
-        latitude = Math.max(-85, Math.min(85, latitude));
-
-        // moving the camera according to current latitude (vertical movement) and longitude (horizontal movement)
-        camera.target.x = 500 * Math.sin(THREE.Math.degToRad(90 - latitude)) * Math.cos(THREE.Math.degToRad(longitude));
-        camera.target.y = 500 * Math.cos(THREE.Math.degToRad(90 - latitude));
-        camera.target.z = 500 * Math.sin(THREE.Math.degToRad(90 - latitude)) * Math.sin(THREE.Math.degToRad(longitude));
-        camera.lookAt(camera.target);
-
-        // calling again render function
-        renderer.render(scene, camera);
-
-    }
-
-    // when the mouse is pressed, we switch to manual control and save current coordinates
-    function onDocumentMouseDown(event){
-
-        event.preventDefault();
-
-        manualControl = true;
-
-        savedX = event.clientX;
-        savedY = event.clientY;
-
-        savedLongitude = longitude;
-        savedLatitude = latitude;
-
-    }
-
-    // when the mouse moves, if in manual contro we adjust coordinates
-    function onDocumentMouseMove(event){
-
-        if(manualControl){
-            longitude = (savedX - event.clientX) * 0.1 + savedLongitude;
-            latitude = (event.clientY - savedY) * 0.1 + savedLatitude;
-            console.log("event.clientX = " + event.clientX);
-            console.log("event.clientY= " + event.clientY);
-        }
-
-    }
-
-    // when the mouse is released, we turn manual control off
-    function onDocumentMouseUp(event){
-
-        manualControl = false;
-
-    }
-
-    // pressing a key (actually releasing it) changes the texture map
-    document.onkeyup = function(event){
-
-        panoramaNumber = (panoramaNumber + 1) % panoramasArray.length
-        sphereMaterial.map = THREE.ImageUtils.loadTexture(panoramasArray[panoramaNumber])
-
-    }
-
-    function moveRight(posX, posY){
-        var speed = 60;
-        /*for Panorimaic View Use this*/
-        //var DirtionX = lastPosX - posX;
-        //var DirtionY = lastPosY - posY;
-        /*for courserHand Use this*/
-        // var DirtionX = posX - lastPosX;
-        // var DirtionY = posY - lastPosY;
-
-
-        // courserHand.style.left = parseInt(courserHand.style.left) + DirtionX * speed + 'px';
-        //courserHand.style.top = parseInt(courserHand.style.top) + DirtionY * speed + 'px';
-
-        /* if(manualControl){
-         console.log(manualControl);
-         longitude = (lastPosX - posX) * speed + savedLongitude;
-         latitude = (posY - lastPosY) * speed + savedLatitude;
-         console.log("longitude = " + longitude);
-         console.log("latitude= " + latitude);
-         }*/
-
-        if(manualControl){
-            longitude = (savedX - posX) * 0.1 + savedLongitude;
-            latitude = (posY - savedY) * 0.1 + savedLatitude;
-            console.log("longitude = " + longitude);
-            console.log("latitude= " + latitude);
-        }
-    }
-
-    function HandCatch(posX, posY){
-        //console.log(posX, posY);
-        /* manualControl = true;
-         lastPosX =posX;
-         lastPosY = posY;*/
-
-
-        manualControl = true;
-
-        savedX = posX;
-        savedY = posY;
-
-        savedLongitude = longitude;
-        savedLatitude = latitude;
-    }
-
-    //Kinect
-    var socket = io.connect('/');
-    var canvas = document.getElementById('bodyCanvas');
-    var ctx = canvas.getContext('2d');
-    var colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#00ffff', '#ff00ff'];
-
-    // handstate circle size
-    var HANDSIZE = 20;
-
-    // closed hand state color
-    var HANDCLOSEDCOLOR = "red";
-
-    // open hand state color
-    var HANDOPENCOLOR = "green";
-
-    // lasso hand state color
-    var HANDLASSOCOLOR = "blue";
-    var firstCatch = true;
-
-    function updateHandState(handState, jointPoint) {
-        switch (handState) {
-            case 3:
-                drawHand(jointPoint, HANDCLOSEDCOLOR);
-                break;
-
-            case 2:
-                drawHand(jointPoint, HANDOPENCOLOR);
-                break;
-
-            case 4:
-                drawHand(jointPoint, HANDLASSOCOLOR);
-                break;
-        }
-    }
-
-    function drawHand(jointPoint, handColor) {
-        // draw semi transparent hand cicles
-        ctx.globalAlpha = 0.75;
-        ctx.beginPath();
-        ctx.fillStyle = handColor;
-        ctx.arc(jointPoint.depthX * 512, jointPoint.depthY * 424, HANDSIZE, 0, Math.PI * 2, true);
-        ctx.fill();
-        ctx.closePath();
-        ctx.globalAlpha = 1;
-    }
-
-    socket.on('bodyFrame', function(bodyFrame){
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        var index = 0;
-        //---------------------------------------
-        var rightHandPosX ;
-        var rightHandPosY ;
-
-        bodyFrame.bodies.forEach(function(body){
-            //console.log("Here");
-            if(body.tracked) {
-                for(var jointType in body.joints) {
-                    var joint = body.joints[jointType];
-                    ctx.fillStyle = colors[index];
-                    ctx.fillRect(joint.depthX * 512, joint.depthY * 424, 10, 10);
-                }
-                //------------------------------
-                rightHandPosX = body.joints[11].depthX;
-                rightHandPosY = body.joints[11].depthY;
-                //console.log(rightHandPos);
-                //alert(rightHandPos);
-                if(body.rightHandState == 3){
-                    if(firstCatch === true){
-                        firstCatch = false;
-                        HandCatch(rightHandPosX * window.innerWidth, rightHandPosY * 400);
-                    }
-                    moveRight(rightHandPosX * window.innerWidth, rightHandPosY * 400);
-                }
-                if(body.rightHandState == 2){
-                    firstCatch = true;
-                    manualControl = false;
-                }
-                //draw hand states
-                updateHandState(body.leftHandState, body.joints[7]);
-                updateHandState(body.rightHandState, body.joints[11]);
-                index++;
+            if (!manualControl) {
+                longitude += 0.1;
             }
+
+            // limiting latitude from -85 to 85 (cannot point to the sky or under your feet)
+            latitude = Math.max(-85, Math.min(85, latitude));
+
+            // moving the camera according to current latitude (vertical movement) and longitude (horizontal movement)
+            camera.target.x = 500 * Math.sin(THREE.Math.degToRad(90 - latitude)) * Math.cos(THREE.Math.degToRad(longitude));
+            camera.target.y = 500 * Math.cos(THREE.Math.degToRad(90 - latitude));
+            camera.target.z = 500 * Math.sin(THREE.Math.degToRad(90 - latitude)) * Math.sin(THREE.Math.degToRad(longitude));
+            camera.lookAt(camera.target);
+
+            // calling again render function
+            renderer.render(scene, camera);
+
+        }
+
+        // when the mouse is pressed, we switch to manual control and save current coordinates
+        function onDocumentMouseDown(event) {
+
+            event.preventDefault();
+
+            manualControl = true;
+
+            savedX = event.clientX;
+            savedY = event.clientY;
+
+            savedLongitude = longitude;
+            savedLatitude = latitude;
+
+        }
+
+        // when the mouse moves, if in manual contro we adjust coordinates
+        function onDocumentMouseMove(event) {
+
+            if (manualControl) {
+                longitude = (savedX - event.clientX) * 0.1 + savedLongitude;
+                latitude = (event.clientY - savedY) * 0.1 + savedLatitude;
+                console.log("event.clientX = " + event.clientX);
+                console.log("event.clientY= " + event.clientY);
+            }
+
+        }
+
+        // when the mouse is released, we turn manual control off
+        function onDocumentMouseUp(event) {
+
+            manualControl = false;
+
+        }
+
+        // pressing a key (actually releasing it) changes the texture map
+        document.onkeyup = function (event) {
+
+            panoramaNumber = (panoramaNumber + 1) % panoramasArray.length
+            sphereMaterial.map = THREE.ImageUtils.loadTexture(PanoTexture);
+
+        }
+
+        function moveRight(posX, posY) {
+            var speed = 60;
+            /*for Panorimaic View Use this*/
+            //var DirtionX = lastPosX - posX;
+            //var DirtionY = lastPosY - posY;
+            /*for courserHand Use this*/
+            // var DirtionX = posX - lastPosX;
+            // var DirtionY = posY - lastPosY;
+
+
+            // courserHand.style.left = parseInt(courserHand.style.left) + DirtionX * speed + 'px';
+            //courserHand.style.top = parseInt(courserHand.style.top) + DirtionY * speed + 'px';
+
+            /* if(manualControl){
+             console.log(manualControl);
+             longitude = (lastPosX - posX) * speed + savedLongitude;
+             latitude = (posY - lastPosY) * speed + savedLatitude;
+             console.log("longitude = " + longitude);
+             console.log("latitude= " + latitude);
+             }*/
+
+            if (manualControl) {
+                longitude = (savedX - posX) * 0.1 + savedLongitude;
+                latitude = (posY - savedY) * 0.1 + savedLatitude;
+                console.log("longitude = " + longitude);
+                console.log("latitude= " + latitude);
+            }
+        }
+
+        function HandCatch(posX, posY) {
+            //console.log(posX, posY);
+            /* manualControl = true;
+             lastPosX =posX;
+             lastPosY = posY;*/
+
+
+            manualControl = true;
+
+            savedX = posX;
+            savedY = posY;
+
+            savedLongitude = longitude;
+            savedLatitude = latitude;
+        }
+
+        //Kinect
+        var socket = io.connect('/');
+        var canvas = document.getElementById('bodyCanvas');
+        var ctx = canvas.getContext('2d');
+        var colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#00ffff', '#ff00ff'];
+
+        // handstate circle size
+        var HANDSIZE = 20;
+
+        // closed hand state color
+        var HANDCLOSEDCOLOR = "red";
+
+        // open hand state color
+        var HANDOPENCOLOR = "green";
+
+        // lasso hand state color
+        var HANDLASSOCOLOR = "blue";
+        var firstCatch = true;
+
+        function updateHandState(handState, jointPoint) {
+            switch (handState) {
+                case 3:
+                    drawHand(jointPoint, HANDCLOSEDCOLOR);
+                    break;
+
+                case 2:
+                    drawHand(jointPoint, HANDOPENCOLOR);
+                    break;
+
+                case 4:
+                    drawHand(jointPoint, HANDLASSOCOLOR);
+                    break;
+            }
+        }
+
+        function drawHand(jointPoint, handColor) {
+            // draw semi transparent hand cicles
+            ctx.globalAlpha = 0.75;
+            ctx.beginPath();
+            ctx.fillStyle = handColor;
+            ctx.arc(jointPoint.depthX * 512, jointPoint.depthY * 424, HANDSIZE, 0, Math.PI * 2, true);
+            ctx.fill();
+            ctx.closePath();
+            ctx.globalAlpha = 1;
+        }
+
+        socket.on('bodyFrame', function (bodyFrame) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            var index = 0;
+            //---------------------------------------
+            var rightHandPosX;
+            var rightHandPosY;
+
+            bodyFrame.bodies.forEach(function (body) {
+                //console.log("Here");
+                if (body.tracked) {
+                    for (var jointType in body.joints) {
+                        var joint = body.joints[jointType];
+                        ctx.fillStyle = colors[index];
+                        ctx.fillRect(joint.depthX * 512, joint.depthY * 424, 10, 10);
+                    }
+                    //------------------------------
+                    rightHandPosX = body.joints[11].depthX;
+                    rightHandPosY = body.joints[11].depthY;
+                    //console.log(rightHandPos);
+                    //alert(rightHandPos);
+                    if (body.rightHandState == 3) {
+                        if (firstCatch === true) {
+                            firstCatch = false;
+                            HandCatch(rightHandPosX * window.innerWidth, rightHandPosY * 400);
+                        }
+                        moveRight(rightHandPosX * window.innerWidth, rightHandPosY * 400);
+                    }
+                    if (body.rightHandState == 2) {
+                        firstCatch = true;
+                        manualControl = false;
+                    }
+                    //draw hand states
+                    updateHandState(body.leftHandState, body.joints[7]);
+                    updateHandState(body.rightHandState, body.joints[11]);
+                    index++;
+                }
+            });
         });
-    });
+    }
 </script>
-
-
-
 
 <div>TODO write content</div>
 <h1><%= title %></h1>

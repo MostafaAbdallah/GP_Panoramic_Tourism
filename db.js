@@ -12,6 +12,7 @@ connection.connect(function(err) {
     } else {
         console.log("Error connecting database ... nn");
     }
+
 });
 
 

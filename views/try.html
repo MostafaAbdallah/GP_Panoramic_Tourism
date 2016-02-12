@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<style>
+
+    .nav li.dropdown ul.dropdown-menu li.nav-list:hover {
+        background: #08c;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .nav li.dropdown ul.dropdown-menu .nav-list {
+        font-size: 13px;
+        color: #333;
+        float: none;
+        line-height: 21px;
+    }
+
+    .nav li.dropdown ul.dropdown-menu li:hover ul {
+        display:block;
+        position:absolute;
+        left:100%;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+    }
+
+    .nav li.dropdown ul.dropdown-menu ul {
+        display: none;
+        float:right;
+        position: relative;
+        top: auto;
+        margin-top: -27px;
+    }
+
+    .nav li.dropdown ul.dropdown-menu .nav-list .caret {
+        border-bottom-color: #999;
+        border-top-color: #999;
+        float: right;
+    }
+
+    .nav li.dropdown ul.dropdown-menu .nav-list:hover .caret {
+        margin-left: 6px;
+        margin-top: 5px;
+        margin-right: 1px;
+        border-right: 0;
+        border-left: 4px solid #fff;
+        border-top: 4px solid transparent;
+        border-bottom: 4px solid transparent;
+    }
+
+    .nav li.dropdown ul .nav-list .dropdown-menu:after {
+        top: 8px;
+        left: -12px;
+        border-top: 6px solid transparent;
+        border-bottom: 6px solid transparent;
+        border-right: 6px solid #fff;
+    }
+
+    .nav li.dropdown ul .nav-list .dropdown-menu:before {
+        left: -7px;
+        border-left: 0;
+        top: 7px;
+        border-top: 7px solid transparent;
+        border-bottom: 7px solid transparent;
+        border-right: 7px solid rgba(0,0,0,0.05);
+    }
+</style>
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
+            <a class="brand" href="#">Brand X</a>
+            <div class="nav-collapse">
+                <ul class="nav">
+                    <li><a href="#">Regular Link</a></li>
+                    <li class="dropdown">
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown">Basic List <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Lorem</a></li>
+                            <li><a href="#">Ipsum</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Nested Lists<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li class="nav-header">Top Stuff</li>
+                            <li class="nav nav-list">Nested List<b class="caret"></b>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Foo</a></li>
+                                    <li><a href="#">Bar</a></li>
+                                    <li><a href="#">Bat</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav nav-list">Nested List<b class="caret"></b>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Foo</a></li>
+                                    <li><a href="#">Bar</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Sit</a></li>
+                            <li><a href="#">Amet</a></li>
+                            <li><a href="#">Dolor</a></li>
+                            <li class="divider"></li>
+                            <li class="nav-header">Other Stuff</li>
+                            <li><a href="#">Foo</a></li>
+                            <li><a href="#">Bar</a></li>
+                            <li><a href="#">Bat</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

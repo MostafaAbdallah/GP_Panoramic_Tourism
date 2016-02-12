@@ -2,6 +2,8 @@ var express = require('express');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var wait= require('wait.for');
+var async = require('async');
+
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 var router = express.Router();
@@ -9,11 +11,20 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', urlencodedParser,function(req, res, next) {
 
-  res.render('index', { title: 'Home', req:req,res:res });
+  var loadPanos= require('./GetPanoramasDB');
+
+   loadPanos.Load(req,res);
+
+  res.render('index', {title: 'Home', req: req, res: res});
 
 });
 
 router.post('/',urlencodedParser ,function(req, res, next) {
+  delete  req.session.countries;
+  var loadPanos= require('./GetPanoramasDB');
+
+  loadPanos.Load(req,res);
+
   var loginDB = require("./LoginDB");
   var Complete =loginDB.Login(req,res);
 //var se=wait.forMethod( loginDB.Login(req,res));
@@ -88,8 +99,20 @@ router.get('/About', function(req, res, next) {
 router.get('/Login', function(req, res, next) {
   res.render('Login', { title: 'Login',req:req, res:res });
 });
+router.get('/ViewCountries', function(req, res, next) {
 
+  //var loadPanos= require('./GetPanoramasDB');
+ // loadPanos.Load(req,res);
 
+  res.render('ViewCountries', { title: 'Login',req:req, res:res });
+});
 
+router.post('/ViewCountries', function(req, res, next) {
+
+ // var loadPanos= require('./GetPanoramasDB');
+ // loadPanos.Load(req,res);
+
+  res.render('ViewCountries', { title: 'Login',req:req, res:res });
+});
 
 module.exports = router;
