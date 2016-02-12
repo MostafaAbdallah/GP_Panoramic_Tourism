@@ -28,8 +28,8 @@ body {
 }
 @media all and (min-width: 640px) {
   .icon {
-    width: 5%;
-    padding-bottom: 5%;
+    width: 7%;
+    padding-bottom: 7%;
   }
 }
 .icon:last-of-type {

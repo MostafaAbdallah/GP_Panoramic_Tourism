@@ -4,15 +4,21 @@ var session = require('express-session');
 var path = require('path');
 var validator = require('express-validator');
 
+/*var loadPanos= require('./routes/GetPanoramasDB');
+
+loadPanos.Load();
+var countries = loadPanos.countries;*/
+
+//console.log(countries);
 var routes = require('./routes/index');
-var db= require('./db');
+//var db= require('./db');
 var kinect = new Kinect2();
 
 var app = express();
 var server = require('http').createServer(app);
 
 var io = require('socket.io').listen(server);
-var db = require('./db');
+//var db = require('./db');
 
 
 app.use(session({
@@ -72,3 +78,4 @@ if(kinect.open()) {
 }
 
 module.exports = app;
+//module.exports = countries;

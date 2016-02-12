@@ -4,26 +4,41 @@ var bodyParser = require('body-parser');
 var wait= require('wait.for');
 var async = require('async');
 
+var futures = require('futures');
+var sequence = futures.sequence();
+var loadPanos= require('./GetPanoramasDB');
+
+ loadPanos.Load();
+var co = loadPanos.countries;
+
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', urlencodedParser,function(req, res, next) {
+router.get('/', urlencodedParser,function(req, res) {
+ // var loadPanos= require('./GetPanoramasDB');
 
-  var loadPanos= require('./GetPanoramasDB');
+  console.log("Here Database call" + co);
+        //req.session.countries = app.countries;
 
-   loadPanos.Load(req,res);
+     /*   req.session.cities = [];
+        req.session.museum = [];
+        req.session.buildings = [];
+        req.session.others = [];*/
+         req.session.countries = co;
 
-  res.render('index', {title: 'Home', req: req, res: res});
+        console.log("Here The Coun" + req.session.countries);
+
+        res.render('index', {title: 'Home', req: req, res: res , Countries:loadPanos.countries});
 
 });
 
 router.post('/',urlencodedParser ,function(req, res, next) {
-  delete  req.session.countries;
+  /*delete  req.session.countries;
   var loadPanos= require('./GetPanoramasDB');
 
-  loadPanos.Load(req,res);
+  loadPanos.Load(req,res);*/
 
   var loginDB = require("./LoginDB");
   var Complete =loginDB.Login(req,res);
@@ -34,6 +49,8 @@ router.post('/',urlencodedParser ,function(req, res, next) {
 
 });
 
+
+/*
 router.post('/Home', urlencodedParser,function(req, res, next) {
   var loginDB = require("./LoginDB");
   loginDB.Login(req,res);
@@ -46,7 +63,7 @@ router.get('/Home', urlencodedParser,function(req, res, next) {
   // res.render('index', { title: 'Home' });
   res.render('Home', { title: 'Home',req:req,res:res });
 
-});
+});*/
 
 /* GET Sign UP page. */
 router.get('/Sign_UP', function(req, res, next) {
@@ -100,19 +117,21 @@ router.get('/Login', function(req, res, next) {
   res.render('Login', { title: 'Login',req:req, res:res });
 });
 router.get('/ViewCountries', function(req, res, next) {
+  /*var loadPanos= require('./GetPanoramasDB');
 
-  //var loadPanos= require('./GetPanoramasDB');
- // loadPanos.Load(req,res);
-
-  res.render('ViewCountries', { title: 'Login',req:req, res:res });
+      loadPanos.Load(req,res);
+  req.session.countries = [];
+  req.session.countries = loadPanos.countries;*/
+  req.session.countries = co;
+      res.render('ViewCountries', { title: 'Login',req:req, res:res});
 });
 
 router.post('/ViewCountries', function(req, res, next) {
 
- // var loadPanos= require('./GetPanoramasDB');
- // loadPanos.Load(req,res);
+  var loadPanos= require('./GetPanoramasDB');
+   loadPanos.Load(req,res);
 
-  res.render('ViewCountries', { title: 'Login',req:req, res:res });
+  res.render('ViewCountries', { title: 'Login',req:req, res:res ,Countries:loadPanos.countries});
 });
 
 module.exports = router;

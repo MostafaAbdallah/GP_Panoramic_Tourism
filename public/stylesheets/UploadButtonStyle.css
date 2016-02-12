@@ -16,19 +16,9 @@
 
 
 }
-.btn-upload .btn {
-    padding: 8px 20px;
-    background: #337ab7;
-    border: 1px solid #2e6da4;
-    color: #fff;
-    border: 0;
-    width: 200px;
-}
+.btn-upload #btn {
 
-.btn-upload:hover .btn{
-    padding: 8px 20px;
-    background: #2e6da4;
-    color: #fff;
-    border: 0;
+
+
 
 }

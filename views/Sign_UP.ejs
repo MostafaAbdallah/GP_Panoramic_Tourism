@@ -1,40 +1,87 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <!--<style>
+        .form input.right{ float:left; margin-left:153px; background: #7a1f5c; display: inline-block; padding: 10px 23px 20px; color: #fbf7f7; text-decoration: none; font-weight: bold; line-height: 1; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; -moz-box-shadow: 0 1px 3px #999; -webkit-box-shadow: 0 1px 3px #999; box-shadow: 0 1px 3px #7a1f5c; text-shadow: 0 -1px 1px #222; border: none; position: right-side; cursor: pointer; font-size: 14px; font-family:Verdana, Geneva, sans-serif;}
+        .form input.right:hover	{ background-color: #7a1f5c; position:center;}
 
+        .form input.buttom{float:left; margin-left:10px; background: #7a1f5c; display: inline-block; padding: 15px 30px 20px; color: #fbf7f7; text-decoration: none; font-weight: bold; line-height: 1; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; -moz-box-shadow: 0 1px 3px #999; -webkit-box-shadow: 0 1px 3px #999; box-shadow: 0 1px 3px #7a1f5c; text-shadow: 0 -1px 1px #222; border: none; position: left-side; cursor: pointer; font-size: 14px; font-family:Verdana, Geneva, sans-serif;}
+        .form input.buttom:hover	{ background-color: #7a1f5c; position:center;}
+
+
+    </style>-->
+ <script>
+
+     function previewFile(){
+         var preview = document.querySelector('img'); //selects the query named img
+         var file    = document.querySelector('input[type=file]').files[0]; //sames as here
+         var reader  = new FileReader();
+
+         reader.onloadend = function () {
+             preview.src = reader.result;
+         }
+
+         if (file) {
+             reader.readAsDataURL(file); //reads the data as a URL
+         } else {
+             preview.src = "/images/default_profile.png";
+         }
+
+         console.log(file.toString());
+     }
+
+     previewFile();  //calls the function named previewFile()
+
+ </script>
     <link rel='stylesheet' href='/stylesheets/UploadButtonStyle.css' />
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <!--<link rel='stylesheet' href='/stylesheets/style.css' />-->
+    <link href="/stylesheets/signup/templatemo_style.css" rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/signup/demo.css" media="all" />
     <!-- <script src="/javascripts/jquery-1.9.1.js"></script>
      <script src="/javascripts/jquery.validate.min.js"></script>
      <script src="/javascripts/additional-methods.min.js"></script> -->
-    <script src="/javascripts/ValidateRegForm.js"></script>
+  <!--  <script src="/javascripts/ValidateRegForm.js"></script>-->
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel='stylesheet' href='/stylesheets/FirstPageStyle.css' />
+    <!--<link rel='stylesheet' href='/stylesheets/FirstPageStyle.css' />-->
     <link rel='stylesheet' href='/stylesheets/SocialButtons/reset.css' />
     <link rel='stylesheet' href='/stylesheets/SocialButtons/style.css' />
-    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
-    <script src="/javascripts/jquery.min.js"></script>
+   <!-- <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">-->
+  <!--  <script src="/javascripts/jquery.min.js"></script>
 
     <script src="/javascripts/bootstrap.min.js"></script>
     <script src="/javascripts/jquery-latest.js"></script>
-    <link href="/stylesheets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/stylesheets/bootstrap/css/bootstrap.min.css" rel="stylesheet">-->
 
     <!-- Custom CSS -->
-    <link href="/stylesheets/bootstrap/css/modern-business.css" rel="stylesheet">
+    <!--<link href="/stylesheets/bootstrap/css/modern-business.css" rel="stylesheet">-->
 
     <!-- Custom Fonts -->
-    <link href="/stylesheets/bootstrap/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+   <!-- <link href="/stylesheets/bootstrap/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">-->
 
-    <script src="/javascripts/html5shiv.js"></script>
-    <script src="/javascripts/respond.min.js"></script>
+   <!-- <script src="/javascripts/html5shiv.js"></script>
+    <script src="/javascripts/respond.min.js"></script>-->
 
 </head>
 <body>
+<div id="templatemo_container">
 
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div id="templatemo_menu">
+        <ul>
+            <li><a href="index.html"  class="current">Home</a></li>
+            <li><a href="subpage.html">Countries</a></li>
+            <li><a href="subpage.html">Cities</a></li>
+            <li><a href="subpage.html">Museums</a></li>
+            <li><a href="subpage.html">Buildings</a></li>
+            <li><a href="index2.html" class="lastmenu">Sign up</a></li>
+        </ul>
+
+    </div>
+    <!-- navtigation bar -->
+   <!-- <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+
     <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
+
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span>
@@ -46,7 +93,7 @@
                 <a class="navbar-brand" href="/"><span class="glyphicon glyphicon-home"></span> Panoramic Tourism</a>
             </li>
         </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
+
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li>
@@ -82,11 +129,13 @@
                 </li>
             </ul>
         </div>
-        <!-- /.navbar-collapse -->
+
     </div>
-    <!-- /.container -->
-</nav>
-<h1 class="page-header">
+
+</nav> -->
+<hr>
+
+<!--<h1 class="page-header">
     Sign up <small>into Panoramic Tourism</small>
     <small><small style="font-family:'Courier New'">&nbsp;&nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -95,60 +144,104 @@
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             KEEP YOUR HANDS ON THE HORIZON</small></small>
-</h1>
-<ol class="breadcrumb">
+</h1>-->
+<!--<ol class="breadcrumb">
     <li><a href="/">Home</a>
     </li>
     <li class="active">Login</li>
-</ol>
-<form method="post" action="/Hello"  id="formreg">
+</ol>-->
+    <div class="container">
+        <!-- freshdesignweb top bar -->
+        <div class="freshdesignweb-top">
+            <div class="clr"></div>
+        </div><!--/ freshdesignweb top bar -->
+        <header>
+            <h4><span> Sign up </span></h4>
+            <div class="right_text">
+                <div  class="form">
+                    <form id="contactform">
 
-    <img src="/images/default_profile.png"  id="imgUpload"  height=200 width=200 name="userImg">
+
+                            <!--<div class="circle" style="background-image: url('/images/default_profile.png')" id="imgUpload" >-->
+                                <img src="/images/default_profile.png"  id="imgUpload"  height=200 width=200 name="userImg" class="circle">
+                                <br>
+                                <br>
+                                <label class="btn-upload">
+                                    <input type="file" name="Upload" onchange="previewFile()" style=" " ><br>
+                                    <input class="right" name="submit" value="Upload Image" type="submit" id="btn">
+                                </label>
+
+                            <!--</div>-->
+
+                    </form>
+                </div>
+                <div id="templatemo_bannertext">
+                    Welcome to <br /><span>Panoramic Tourism View</span><br />
+                    Master
+                </div>
+
+            </div>
+        </header>
+
+        <div  class="form">
+        <form method="post" action="/Hello"  id="contactform">
+
+   <!-- <img src="/images/default_profile.png"  id="imgUpload"  height=200 width=200 name="userImg">
     <br>
     <br>
     <label class="btn-upload">
         <input type="file" name="Upload" onchange="previewFile()" ><br>
         <button class="btn" >Upload Photo</button>
-    </label>
+    </label>-->
     <br>
     <br>
     <br>
+    <p class="contact"><label for="name">Name</label></p>
     <input type="text" name="Fname" value="" placeholder="Full Name" id="FN" />
     <br/>
     <br/>
     <br/>
     <br/>
+    <p class="contact"><label for="email">Email</label></p>
     <input type="text" name="email" value="" placeholder='Email' id="em" size="45" onblur="EmailCheck()"/>
     <br/>
     <br/>
     <br/>
     <br/>
+    <p class="contact"><label for="username">Passwprd</label></p>
     <input type="password" name="newpassword1" value="" placeholder="Password"  size="45" maxlength="10" id='pass'/>
 
     <br/>
     <br/>
     <br/>
+    <p class="contact"><label for="password">Confirm password</label></p>
     <input type="password" name="confirm_password" value=""  placeholder="Confirm Password"  size="45" maxlength="10" id='cpass'/>
     <br/>
     <br/>
     <br/>
     <br/>
+    <p class="contact"><label for="phone">Mobile phone</label></p>
     <input type="text" name="mobile" value="" placeholder="Mobile Number +20"  maxlength="11" size="35" id='mo'/>
     <br/>
     <br/>
     <br/>
     <br/>
+    <p class="contact"><label for="password">Facebook Account</label></p>
     <input type="text" name="Face" value="" placeholder="Facebook Account"   size="45" id='face'/>
     <br/>
     <br/>
     <br/>
     <br/>
+    <p class="contact"><label for="password">Flickr Account</label></p>
     <input type="text" name="flickr" value="" placeholder="Flickr Account"   size="45" id='flickr'/>
     <br/>
     <br/>
     <br/>
     <br/>
-    <label id="la">Birthday</label>
+       <label> Month <input class="birthday" maxlength="2" name="BirthDay"  placeholder="Month" required=""></label>
+        <label> Day <input class="birthday" maxlength="2" name="BirthDay"  placeholder="Day" required=""></label>
+        <label>Year <input class="birthyear" maxlength="4" name="BirthYear" placeholder="Year" required=""></label>
+   <!-- <label id="la">Birthday</label>
          <span  id="bd">
             <select name="month" required="" >
                 <option value="" disabled selected>Month</option>
@@ -228,18 +321,20 @@
                  <option>2015</option>
              </select>
          </span>
+    </fieldset>-->
     <br/>
     <br/>
     <br/>
     <br/>
+    <!--  <p class="contact"><label for="check">Our Terms</label></p>
     <input type="checkbox" name="agree" value="agree" required="true" onclick="this.form.go.style.visibility=this.checked ? 'visible' : 'hidden';" >I have read and agree to be bound <br> by the Terms and Conditions and <br> privacy policy
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <input type="submit" value="Sign Up" onclick="return check()"  style="visibility:hidden" id="go"/>
-</form>
-<!-- Footer -->
+     <br/>
+     <br/>
+     <br/>
+     <br/>-->
+     <input class="buttom" type="submit" value="Sign me up!" onclick="return check()"   id="go"/>
+ </form>
+ <!-- Footer -->
 <hr>
 <footer>
     <div class="row">
@@ -291,20 +386,18 @@
         </div>
     </div>
 </footer>
+<!-- Footer -->
+</div>
+    </div>
 
 </div>
 
-
-<script src="/stylesheets/bootstrap/js/jquery.js"></script>
+<!--<script src="/stylesheets/bootstrap/js/jquery.js"></script>-->
 
 <!-- Bootstrap Core JavaScript -->
-<script src="/stylesheets/bootstrap/js/bootstrap.min.js"></script>
+<!--<script src="/stylesheets/bootstrap/js/bootstrap.min.js"></script>-->
 
 <!-- Script to Activate the Carousel -->
-<script>
-    $('.carousel').carousel({
-        interval: 5000 //changes the speed
-    })
-</script>
+
 </body>
 </html>

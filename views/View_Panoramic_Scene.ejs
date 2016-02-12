@@ -18,7 +18,7 @@ and open the template in the editor.
 
 <script src="/socket.io/socket.io.js"></script>
 <script type="text/javascript">
-    function View (PanoTexture) {
+
         var lastPosX;
         var lastPosY;
         var manualControl = false;
@@ -30,7 +30,7 @@ and open the template in the editor.
         var savedLatitude;
 
         // panoramas background
-        //var panoramasArray = ["/images/01.jpg","/images/02.jpg","/images/03.jpg","/images/04.jpg","/images/05.jpg","/images/06.jpg","/images/07.jpg","/images/08.jpg"];
+        var panoramasArray = ["/images/panoramas/01.jpg","/images/panoramas/02.jpg","/images/panoramas/03.jpg","/images/panoramas/04.jpg","/images/panoramas/05.jpg","/images/panoramas/06.jpg","/images/panoramas/07.jpg","/images/panoramas/08.jpg","/images/panoramas/tajmahal2.jpg"];
 
         var panoramaNumber = Math.floor(Math.random() * panoramasArray.length);
 
@@ -53,7 +53,7 @@ and open the template in the editor.
 
         // creation of the sphere material
         var sphereMaterial = new THREE.MeshBasicMaterial();
-        sphereMaterial.map = THREE.ImageUtils.loadTexture(PanoTexture);
+        sphereMaterial.map = THREE.ImageUtils.loadTexture(panoramasArray[panoramaNumber]);
 
         // geometry + material = mesh (actual object)
         var sphereMesh = new THREE.Mesh(sphere, sphereMaterial);
@@ -129,7 +129,7 @@ and open the template in the editor.
         document.onkeyup = function (event) {
 
             panoramaNumber = (panoramaNumber + 1) % panoramasArray.length
-            sphereMaterial.map = THREE.ImageUtils.loadTexture(PanoTexture);
+            sphereMaterial.map = THREE.ImageUtils.loadTexture(panoramasArray[panoramaNumber]);
 
         }
 
@@ -262,7 +262,7 @@ and open the template in the editor.
                 }
             });
         });
-    }
+
 </script>
 
 <div>TODO write content</div>
