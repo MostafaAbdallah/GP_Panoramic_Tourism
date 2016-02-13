@@ -10,7 +10,13 @@ var loadPanos= require('./GetPanoramasDB');
 
  loadPanos.Load();
 var co = loadPanos.countries;
+var ci = loadPanos.cities;
+var bl = loadPanos.buildings;
+var mu = loadPanos.museums;
+var oth = loadPanos.others;
 
+loadPanos.LoadImgs();
+var images = loadPanos.images;
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 var router = express.Router();
@@ -27,10 +33,13 @@ router.get('/', urlencodedParser,function(req, res) {
         req.session.buildings = [];
         req.session.others = [];*/
          req.session.countries = co;
-
-        console.log("Here The Coun" + req.session.countries);
-
-        res.render('index', {title: 'Home', req: req, res: res , Countries:loadPanos.countries});
+         req.session.Cities=ci;
+         req.session.buildings=bl;
+         req.session.museums=mu;
+         req.session.other=oth;
+    console.log("Here The Coun" + req.session.countries[2]);
+      console.log(images);
+    res.render('index', {title: 'Home', req: req, res: res , Countries:loadPanos.countries});
 
 });
 
@@ -106,7 +115,7 @@ router.get('/Upload_Panoramic_View', function(req, res, next) {
 
 /* GET View Panoramic Scene page. */
 router.get('/View_Panoramic_Scene', function(req, res, next) {
-  res.render('View_Panoramic_Scene', { title: 'View Panoramic Scene',req:req,res:res });
+  res.render('View_Panoramic_Scene', { title: 'View Panoramic Scene',req:req,res:res , Images:images});
 });
 
 router.get('/About', function(req, res, next) {

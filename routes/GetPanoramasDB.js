@@ -1,6 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-
+var fs = require('fs');
 var UserSchema=require('../schemas/user');
 var session = require('express-session');
 
@@ -9,6 +9,11 @@ var sequence = futures.sequence();
 
 
 var countries= [];
+var citeis= [];
+var buildings= [];
+var museums= [];
+var others= [];
+var imgs= [];
 
 var LoadPanoramas = function () {
 
@@ -65,12 +70,12 @@ var LoadPanoramas = function () {
     // console.log(countries);
 //============================================ select cities =======================================\\
 
- /*   var SelectCity = connection.query('Select * from city ', function (err, rows2) {
+  var SelectCity = connection.query('Select * from city ', function (err, rows2) {
         if (err) throw err;
 
         console.log('Data received from Db:\n');
         for (var i = 0; i < rows2.length; i++) {
-            req.session.cities.push(rows2[i]);
+           citeis.push(rows2[i]);
 
         }
 
@@ -87,8 +92,7 @@ var LoadPanoramas = function () {
 
         //  req.session.museum=rows;
         for (var i = 0; i < rows.length; i++) {
-            req.session.museum.push(rows[i]);
-            console.log(req.session.museum[i]);
+            museums.push(rows[i]);
 
         }
 
@@ -102,7 +106,7 @@ var LoadPanoramas = function () {
 
         console.log('Data received from Db:\n');
         for (var i = 0; i < rows.length; i++) {
-            req.session.buildings.push(rows[i]);
+           buildings.push(rows[i]);
 
         }
 
@@ -117,7 +121,7 @@ var LoadPanoramas = function () {
         console.log('Data received from Db:\n');
 
         for (var i = 0; i < rows.length; i++) {
-            req.session.others.push(rows[i]);
+           others.push(rows[i]);
 
         }
 
@@ -125,7 +129,7 @@ var LoadPanoramas = function () {
 
     });
 
-    req.session.countries = (countries);*/
+
 
 
 }
@@ -137,7 +141,25 @@ var LoadPanoramas = function () {
    // next(null, 2);
 
 }*/
+var loadImages=function(){
+    var folder = "./public/images/panoramas";
+
+    fs.readdir(folder, function(err, items) {
+       // console.log(items);
+
+        for (var i=0; i<items.length; i++) {
+            imgs.push("/images/panoramas/"+items[i]);
+        }
+    });
+}
 
 module.exports.Load = LoadPanoramas;
+module.exports.LoadImgs = loadImages;
 
 module.exports.countries=countries;
+module.exports.cities=citeis;
+module.exports.buildings=buildings;
+module.exports.museums=museums;
+module.exports.others=others;
+
+module.exports.images=imgs;

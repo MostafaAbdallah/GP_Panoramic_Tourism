@@ -144,12 +144,103 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li class="active"><a href="/"><span class="glyphicon glyphicon-home"></span>    Home</a></li>
-        <li>
-          <a href="/ViewCountries">View More ...</a>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">&nbsp; Countries <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <%var countires= req.session.countries;
+            for(var i=0;i<countires.length;i++){
+              if(i==5){
+                break;
+              }
+            %>
+            <li>
+              <a href="/View_Panoramic_Scene" name="<%=countires[i].CountryName%>"><%=countires[i].CountryName%></a>
+            </li>
+            <%}%>
+            </li>
+            <li>
+              <a href="/ViewCountries">View More ...</a>
+            </li>
+          </ul>
+        </li>
+          <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">&nbsp; Cities <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <%var Cities= req.session.Cities;
+        for(var i=0;i<Cities.length;i++){
+          if(i==5){
+            break;
+          }
+        %>
+            <li>
+              <a href="/View_Panoramic_Scene" name="<%=Cities[i].Name%>"><%=Cities[i].Name%></a>
+            </li>
+            <%}%>
+            </li>
+            <li>
+              <a href="/ViewCities">View More ...</a>
+            </li>
+          </ul>
         </li>
 
-
-        <li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">&nbsp; Museums <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <%var museums= req.session.museums;
+        for(var i=0;i<museums.length;i++){
+          if(i==4){
+            break;
+          }
+        %>
+            <li>
+              <a href="/View_Panoramic_Scene" name="<%=museums[i].Name%>"><%=museums[i].Name%></a>
+            </li>
+            <%}%>
+            </li>
+            <li>
+              <a href="/ViewMuseums">View More ...</a>
+            </li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">&nbsp; Buildings <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <%var buildings= req.session.buildings;
+        for(var i=0;i<buildings.length;i++){
+          if(i==5){
+            break;
+          }
+        %>
+            <li>
+              <a href="/View_Panoramic_Scene" name="<%=buildings[i].Name%>"><%=buildings[i].Name%></a>
+            </li>
+            <%}%>
+            </li>
+            <li>
+              <a href="/ViewBuildings">View More ...</a>
+            </li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">&nbsp; Others <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <%var other= req.session.other;
+        for(var i=0;i<other.length;i++){
+          if(i==5){
+            break;
+          }
+        %>
+            <li>
+              <a href="/View_Panoramic_Scene" name="<%=other[i].Name%>"><%=other[i].Name%></a>
+            </li>
+            <%}%>
+            </li>
+            <li>
+              <a href="/ViewOthers">View More ...</a>
+            </li>
+          </ul>
+        </li>
+           <li>
           <a href="/Upload_Panoramic_View"> <span class="glyphicon glyphicon-upload"></span> Upload Panorama</a>
         </li>
       </ul>
