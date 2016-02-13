@@ -154,7 +154,7 @@
               }
             %>
             <li>
-              <a href="/View_Panoramic_Scene" name="<%=countires[i].CountryName%>"><%=countires[i].CountryName%></a>
+              <a name="<%=countires[i].FlagImage%>"><%=countires[i].CountryName%></a>
             </li>
             <%}%>
             </li>
@@ -173,7 +173,7 @@
           }
         %>
             <li>
-              <a href="/View_Panoramic_Scene" name="<%=Cities[i].Name%>"><%=Cities[i].Name%></a>
+              <a href="/View_Panoramic_Scene?link=<%=Cities[i].ImagePath%>" name="<%=Cities[i].Name%>"><%=Cities[i].Name%></a>
             </li>
             <%}%>
             </li>
@@ -193,7 +193,7 @@
           }
         %>
             <li>
-              <a href="/View_Panoramic_Scene" name="<%=museums[i].Name%>"><%=museums[i].Name%></a>
+              <a href="/View_Panoramic_Scene?link=<%=museums[i].ImagePath%>" name="<%=museums[i].Name%>"><%=museums[i].Name%></a>
             </li>
             <%}%>
             </li>
@@ -207,12 +207,10 @@
           <ul class="dropdown-menu">
             <%var buildings= req.session.buildings;
         for(var i=0;i<buildings.length;i++){
-          if(i==5){
-            break;
-          }
+
         %>
             <li>
-              <a href="/View_Panoramic_Scene" name="<%=buildings[i].Name%>"><%=buildings[i].Name%></a>
+              <a href="/View_Panoramic_Scene?link=<%=buildings[i].ImagePath%>" name="<%=buildings[i].Name%>"><%=buildings[i].Name%></a>
             </li>
             <%}%>
             </li>
@@ -226,12 +224,10 @@
           <ul class="dropdown-menu">
             <%var other= req.session.other;
         for(var i=0;i<other.length;i++){
-          if(i==5){
-            break;
-          }
+
         %>
             <li>
-              <a href="/View_Panoramic_Scene" name="<%=other[i].Name%>"><%=other[i].Name%></a>
+              <a href="/View_Panoramic_Scene?link=<%=other[i].ImagePath%>" name="<%=other[i].Name%>"><%=other[i].Name%></a>
             </li>
             <%}%>
             </li>
@@ -366,7 +362,7 @@
         <li>uploading a new panoramic views</li>
         <li>discover new places </li>
       </ul>
-      <p>A very powerful virtual map for the passengers .</p>
+      <p><strong>A very powerful virtual map for the passengers .</strong></p>
     </div>
     <div class="col-md-6">
       <img class="img-responsive" src="/images/Kinect-Adapter-for-Windows-620x363.png" alt="">

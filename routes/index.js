@@ -9,6 +9,11 @@ var sequence = futures.sequence();
 var loadPanos= require('./GetPanoramasDB');
 
  loadPanos.Load();
+var CityImages=loadPanos.Cityimages;
+var BuildingImages=loadPanos.Buildingsimages;
+var MuseumsImages=loadPanos.MuseumImages;
+var OtherImages = loadPanos.OtherImages;
+console.log(BuildingImages)
 var co = loadPanos.countries;
 var ci = loadPanos.cities;
 var bl = loadPanos.buildings;
@@ -25,20 +30,33 @@ var router = express.Router();
 router.get('/', urlencodedParser,function(req, res) {
  // var loadPanos= require('./GetPanoramasDB');
 
-  console.log("Here Database call" + co);
+  //console.log("Here Database call" + co);
         //req.session.countries = app.countries;
 
      /*   req.session.cities = [];
         req.session.museum = [];
         req.session.buildings = [];
         req.session.others = [];*/
+    for( var i=0;i<ci.length;i++){
+        ci[i].ImagePath=CityImages[i];
+    }
+    for( var i=0;i<bl.length;i++){
+        bl[i].ImagePath=BuildingImages[i];
+    }
+    for( var i=0;i<mu.length;i++){
+        mu[i].ImagePath=MuseumsImages[i];
+    }
+    for( var i=0;i<oth.length;i++){
+        oth[i].ImagePath=OtherImages[i];
+    }
+
          req.session.countries = co;
          req.session.Cities=ci;
          req.session.buildings=bl;
          req.session.museums=mu;
          req.session.other=oth;
-    console.log("Here The Coun" + req.session.countries[2]);
-      console.log(images);
+    //console.log("Here The Coun" + req.session.countries[2]);
+    //  console.log(images);
     res.render('index', {title: 'Home', req: req, res: res , Countries:loadPanos.countries});
 
 });
@@ -114,8 +132,13 @@ router.get('/Upload_Panoramic_View', function(req, res, next) {
 });
 
 /* GET View Panoramic Scene page. */
-router.get('/View_Panoramic_Scene', function(req, res, next) {
+router.get('/View_Panoramic_Scene',urlencodedParser, function(req, res, next) {
+
   res.render('View_Panoramic_Scene', { title: 'View Panoramic Scene',req:req,res:res , Images:images});
+});
+router.post('/View_Panoramic_Scene',urlencodedParser ,function(req, res, next) {
+
+    res.render('View_Panoramic_Scene', { title: 'View Panoramic Scene',req:req,res:res , Images:images});
 });
 
 router.get('/About', function(req, res, next) {

@@ -14,6 +14,10 @@ var buildings= [];
 var museums= [];
 var others= [];
 var imgs= [];
+var Cityim=[];
+var Buildingim=[];
+var Museumim=[];
+var Otherim=[];
 
 var LoadPanoramas = function () {
 
@@ -59,7 +63,7 @@ var LoadPanoramas = function () {
             obj = rows[i];
             //if(countries)
             countries.push(obj);
-            console.log("countries hhhhhgh  "  + rows.length);
+          //  console.log("countries hhhhhgh  "  + rows.length);
         }
 
 
@@ -74,12 +78,23 @@ var LoadPanoramas = function () {
         if (err) throw err;
 
         console.log('Data received from Db:\n');
+
         for (var i = 0; i < rows2.length; i++) {
-           citeis.push(rows2[i]);
 
+           var post= {CityID : rows2[i].CityID};
+            var city = {
+                CityID: rows2[i].CityID,
+                Name: rows2[i].Name,
+                CountryID: rows2[i].CountryID,
+            }
+
+            var SelectCityImage = connection.query('Select * from city_image where  ? ',post, function (err, rows3) {
+
+             Cityim.push(rows3[0].ImagePath) ;
+
+            });
+            citeis.push(city);
         }
-
-        // req.session.cities=rows;
 
     });
 
@@ -88,14 +103,23 @@ var LoadPanoramas = function () {
     var SelectMuseum = connection.query('Select * from museum ', function (err, rows) {
         if (err) throw err;
 
-        console.log('Data received from Db:\n');
-
         //  req.session.museum=rows;
         for (var i = 0; i < rows.length; i++) {
-            museums.push(rows[i]);
 
+
+            var post2 = {MuseumID: rows[i].MuseumID};
+
+            var obj2 = rows[i];
+            var Museum = {
+                MuseumID: obj2.MuseumID,
+                Name: obj2.Name,
+                CountryID: obj2.CountryID,
+            }
+            var SelectCityImage = connection.query('Select * from museum_image where ? ', post2, function (err, rows5) {
+             Museumim.push(rows5[0].ImagePath);
+            });
+            museums.push(Museum);
         }
-
 
     });
 
@@ -104,15 +128,33 @@ var LoadPanoramas = function () {
     var SelectBuilding = connection.query('Select * from building ', function (err, rows) {
         if (err) throw err;
 
-        console.log('Data received from Db:\n');
+
         for (var i = 0; i < rows.length; i++) {
-           buildings.push(rows[i]);
+
+            var post3 = {BuildingID: rows[i].BuildingID};
+
+            var Building = {
+                BuildingID: rows[i].BuildingID,
+                Name: rows[i].Name,
+                CountryID: rows[i].CountryID,
+            }
+
+
+            var SelectCityImage = connection.query('Select * from building_image where ? ', post3, function (err, rows6) {
+
+                Buildingim.push(rows6[0].ImagePath);
+            });
+
+
+
+            buildings.push(Building);
+
+
 
         }
 
-//        req.session.buildings=rows;
-
     });
+
 //============================================ select others =======================================\\
 
     var SelectOther = connection.query('Select * from other ', function (err, rows) {
@@ -121,8 +163,24 @@ var LoadPanoramas = function () {
         console.log('Data received from Db:\n');
 
         for (var i = 0; i < rows.length; i++) {
-           others.push(rows[i]);
 
+            var post5 = {OtherID: rows[i].OtherID};
+            var Other = {
+                OtherID: rows[i].OtherID,
+                Name: rows[i].Name,
+                CountryID: rows[i].CountryID}
+
+
+            var SelectCityImage = connection.query('Select * from other_image where ? ', post5, function (err, rows7) {
+
+
+                    Otherim.push(rows7[0].ImagePath);
+
+
+
+            });
+
+            others.push(Other);
         }
 
         //req.session.others=rows;
@@ -161,5 +219,9 @@ module.exports.cities=citeis;
 module.exports.buildings=buildings;
 module.exports.museums=museums;
 module.exports.others=others;
-
+console.log(others);
+module.exports.Cityimages=Cityim;
+module.exports.Buildingsimages=Buildingim;
+module.exports.MuseumImages=Museumim;
+module.exports.OtherImages=Otherim;
 module.exports.images=imgs;
